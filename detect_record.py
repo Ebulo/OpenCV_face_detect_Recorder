@@ -2,8 +2,10 @@ import cv2
 import time
 import datetime
 
+# Choosing the video captuure device, and calling the method to start
 cap = cv2.VideoCapture(0)
 
+# Using the open CV data to detect face and body and also provide the coordinates.
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 body_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_fullbody.xml")
 
@@ -17,6 +19,7 @@ vdo_fmt_fourcc = cv2.VideoWriter_fourcc(*"mp4v")
 # output = cv2.VideoWriter("Video.mp4", vdo_fmt_fourcc, 20, frame_size)
 
 while True:
+    # Reading each frame 
     _, frame = cap.read()
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -48,7 +51,8 @@ while True:
     for (x, y, width, height) in bodies:
         cv2.rectangle(frame, (x, y), (x + width, y + height), (0, 255, 0), 3)
 
-    # cv2.imshow("Detector", frame)
+    # Showing the video each frame
+    cv2.imshow("Detector", frame)
 
     if cv2.waitKey(1) == "q":
         break
